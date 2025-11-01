@@ -35,10 +35,15 @@ public class AccountService {
                 .build();
         Account savedAccount = accountRepository.save(account);
 
+        if (accountRequest.getName().equals("error")) {
+            throw  new RuntimeException("Name should contain word 'error'");
+        }
+
         Address address = Address.builder()
                 .accountId(savedAccount.getId())
                 .city(accountRequest.getCity())
                 .build();
+
         Address savedAddress = addressService.saveAddressRequiredTransaction(address);
 
         return AccountResponseDto.builder()
@@ -63,6 +68,7 @@ public class AccountService {
                                         .id(account.getId())
                                         .name(account.getName())
                                         .balance(account.getBalance())
+                                        .addressId(address.getId())
                                         .city(address.getCity())
                                         .build();
                                 accountResponseDtoList.add(accountResponseDto);

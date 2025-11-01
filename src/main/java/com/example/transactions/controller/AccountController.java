@@ -4,10 +4,7 @@ import com.example.transactions.dto.AccountRequestDto;
 import com.example.transactions.dto.AccountResponseDto;
 import com.example.transactions.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class AccountController {
 
 
     @PostMapping
-    public AccountResponseDto createAccount(AccountRequestDto accountRequest) {
+    public AccountResponseDto createAccount(@RequestBody AccountRequestDto accountRequest) {
         return accountService.createAccount(accountRequest);
     }
 
